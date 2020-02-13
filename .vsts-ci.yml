@@ -13,7 +13,7 @@ steps:
 
 - task: CMake@1
   inputs:
-    cmakeArgs: '--DCMAKE_BUILD_TYPE=Release'
+    cmakeArgs: '-DCMAKE_BUILD_TYPE=Release'
 
 - task: CopyFiles@2
   displayName: 'Copy artifacts'
