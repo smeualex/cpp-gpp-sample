@@ -1,22 +1,27 @@
+trigger:
+- master
+
+variables:
+  configuration: 'Release'
+#  system.debug: 'true'
+
 jobs:
 ##################################################################################
 ## LINUX BUILD JOB
 - job: buildLinux
-  displayName: 'Build Linux binary'
+  displayName: 'Build Linux binary - $(configuration)'
   pool:
     vmImage: 'Ubuntu 16.04'
-  #variables:
-  #  system.debug: 'true'
   steps:
   - script: |
       mkdir build
       cd build
-      cmake -DCMAKE_BUILD_TYPE=Release ..
+      cmake -DCMAKE_BUILD_TYPE=$(configuration) ..
     displayName: 'cmake configure'
   
   - task: CMake@1
     inputs:
-      cmakeArgs: '--build . --config Release'
+      cmakeArgs: '--build . --config $(configuration)'
   
   - task: CopyFiles@2
     displayName: 'Copy artifacts'
@@ -35,7 +40,7 @@ jobs:
 ##################################################################################
 ## WINDOWS BUILD JOB
 - job: buildWindows
-  displayName: 'Build Windows binary'
+  displayName: 'Build Windows binary - $(configuration)'
   pool:
     vmImage: 'windows-latest'
   #variables:
@@ -44,12 +49,12 @@ jobs:
   - script: |
       mkdir build
       cd build
-      cmake -DCMAKE_BUILD_TYPE=Release ..
+      cmake -DCMAKE_BUILD_TYPE=$(configuration) ..
     displayName: 'cmake configure'
   
   - task: CMake@1
     inputs:
-      cmakeArgs: '--build . --config Release'
+      cmakeArgs: '--build . --config $(configuration)'
   
   - task: CopyFiles@2
     displayName: 'Copy artifacts'
