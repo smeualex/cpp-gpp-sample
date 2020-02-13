@@ -9,7 +9,11 @@ pool:
 #  system.debug: 'true'
 
 steps:
-- script: 'make'
+# - script: 'make'
+
+- task: CMake@1
+  inputs:
+    cmakeArgs: '--DCMAKE_BUILD_TYPE=Release'
 
 - task: CopyFiles@2
   displayName: 'Copy artifacts'
