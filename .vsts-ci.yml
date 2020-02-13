@@ -9,11 +9,15 @@ pool:
 #  system.debug: 'true'
 
 steps:
-# - script: 'make'
+- script: |
+    mkdir build
+    cd build
+    make -DCMAKE_BUILD_TYPE=Release ..
+  displayName: 'cmake configure'
 
 - task: CMake@1
   inputs:
-    cmakeArgs: '-DCMAKE_BUILD_TYPE=Release'
+    cmakeArgs: '--build . --config Release'
 
 - task: CopyFiles@2
   displayName: 'Copy artifacts'
