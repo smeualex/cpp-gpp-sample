@@ -3,7 +3,7 @@
 # https://aka.ms/yaml
 
 pool:
-  vmImage: 'Hosted Ubuntu 1604'
+  vmImage: 'Ubuntu 1604'
 
 #variables:
 #  system.debug: 'true'
